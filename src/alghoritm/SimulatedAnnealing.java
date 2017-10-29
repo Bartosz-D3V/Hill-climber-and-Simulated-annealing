@@ -4,19 +4,16 @@ import controller.ChartController;
 import domain.Line;
 import domain.Point;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class SimulatedAnnealing {
 
     private final static double coolingRate = 0.004;
     private double temperature = 2000000;
     private final ChartController chartController;
-    private final Set<Integer> forbiddenIndexes = new HashSet<>();
 
-    public SimulatedAnnealing(ChartController chartController) {
+    public SimulatedAnnealing(final ChartController chartController) {
         this.chartController = chartController;
     }
 
@@ -57,6 +54,7 @@ public class SimulatedAnnealing {
      * Method that pick a random Point from the list
      * making sure that it is unique - i.e. it will not
      * pick the same point twice so the distance would be 0
+     * in that case
      *
      * @return Point
      */
@@ -64,12 +62,10 @@ public class SimulatedAnnealing {
         final Random random = new Random();
         final List<Point> listOfPoints = this.chartController.getPoints();
         int randomIndex = random.nextInt(listOfPoints.size());
-        if (this.forbiddenIndexes.contains(randomIndex)) {
-            randomIndex = random.nextInt(listOfPoints.size());
-        }
-        this.forbiddenIndexes.add(randomIndex);
 
-        return listOfPoints.get(randomIndex);
+        final Point randomPoint = listOfPoints.get(randomIndex);
+        listOfPoints.remove(randomPoint);
 
+        return randomPoint;
     }
 }
