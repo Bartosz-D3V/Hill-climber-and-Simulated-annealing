@@ -12,10 +12,9 @@ import java.util.Set;
 public class SimulatedAnnealing {
 
     private final static double coolingRate = 0.004;
-    private double temperature = 20000;
+    private double temperature = 2000000;
     private final ChartController chartController;
-
-    final Set<Integer> forbiddenIndexes = new HashSet<>();
+    private final Set<Integer> forbiddenIndexes = new HashSet<>();
 
     public SimulatedAnnealing(ChartController chartController) {
         this.chartController = chartController;
@@ -29,7 +28,6 @@ public class SimulatedAnnealing {
 
         while (this.temperature > 1) {
             Line newSolution = new Line(currentSolution.getStartPoint(), currentSolution.getEndPoint());
-            Point currentPoint = this.getRandomPoint();
             currentEnergy = currentSolution.getDistance();
             neighbourEnergy = newSolution.getDistance();
 
@@ -55,11 +53,18 @@ public class SimulatedAnnealing {
         return Math.exp((energy - newEnergy) / temperature);
     }
 
+    /**
+     * Method that pick a random Point from the list
+     * making sure that it is unique - i.e. it will not
+     * pick the same point twice so the distance would be 0
+     *
+     * @return Point
+     */
     private Point getRandomPoint() {
         final Random random = new Random();
         final List<Point> listOfPoints = this.chartController.getPoints();
         int randomIndex = random.nextInt(listOfPoints.size());
-        if (forbiddenIndexes.contains(randomIndex)) {
+        if (this.forbiddenIndexes.contains(randomIndex)) {
             randomIndex = random.nextInt(listOfPoints.size());
         }
         this.forbiddenIndexes.add(randomIndex);

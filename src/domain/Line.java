@@ -39,10 +39,21 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" +
-                "startPoint=" + startPoint +
-                ", endPoint=" + endPoint +
-                ", distance=" + distance +
-                '}';
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Currently the best found solution ")
+                .append("is the line with the following points:")
+                .append(System.lineSeparator())
+                .append("Start point:")
+                .append(System.lineSeparator())
+                .append(this.startPoint.toString())
+                .append(System.lineSeparator())
+                .append("End point:")
+                .append(System.lineSeparator())
+                .append(this.endPoint.toString())
+                .append(System.lineSeparator())
+                .append("Total distance between points:")
+                .append(this.distance);
+
+        return stringBuilder.toString();
     }
 }
