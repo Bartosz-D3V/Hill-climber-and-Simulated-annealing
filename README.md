@@ -1,4 +1,4 @@
-# Hill climber and Simulated anealing - Matlab implementation
+# Hill climber and Simulated anealing
 
 ## Simulated annealing
 Simulated Annealing is one of the probabilistic methods to search for global optimum (i.e. minimum and maximum values) of a given function. Simulated Annealing is often used when time of finding a value is more important than precision of a result.
