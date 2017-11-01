@@ -14,13 +14,17 @@ public class SimulatedAnnealing {
     }
 
     public double findOptima() {
-        double bestFound = this.universe.get(this.getRandomIndex());
+        double currentSolution = this.universe.get(this.getRandomIndex());
         while (temperature > coolingRate) {
+            // Create new solution that initially bases on the current one
+            double newSolution = currentSolution;
+            // Get random position in our universe
+            int newSolutionPosition = this.getRandomIndex();
 
             temperature *= 1 - coolingRate;
         }
 
-        return bestFound;
+        return currentSolution;
     }
 
     private double acceptanceProbability(final double energy, final double newEnergy, final double temperature) {
