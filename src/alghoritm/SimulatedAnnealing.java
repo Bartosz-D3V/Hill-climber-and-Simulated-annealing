@@ -15,11 +15,22 @@ public class SimulatedAnnealing {
 
     public double findOptima() {
         double currentSolution = this.universe.get(this.getRandomIndex());
+        double bestSolution = this.universe.get(this.getRandomIndex());
+        double currentEnergy = currentSolution;
         while (temperature > coolingRate) {
             // Create new solution that initially bases on the current one
             double newSolution = currentSolution;
             // Get random position in our universe
             int newSolutionPosition = this.getRandomIndex();
+            final double newSolutionEnergy = Math.abs(bestSolution -(newSolutionPosition));
+
+            if (this.acceptanceProbability(currentEnergy, newSolutionEnergy, temperature) > Math.random()) {
+                currentSolution = newSolution;
+            }
+
+            if (newSolutionEnergy < bestSolution) {
+                bestSolution = currentSolution;
+            }
 
             temperature *= 1 - coolingRate;
         }
