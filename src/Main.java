@@ -6,6 +6,12 @@ public class Main {
     public static void main(String[] args) {
         DeJongOne deJongOne = new DeJongOne(-5.12, 5.12);
         SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(deJongOne.getUniverse());
-        System.out.print(simulatedAnnealing.findOptima());
+
+        // Start the annealing
+        final long startTime = System.currentTimeMillis();
+        final double foundOptima = simulatedAnnealing.findOptima();
+        final long stopTime = System.currentTimeMillis();
+        System.out.println("Found solution: " + foundOptima);
+        System.out.println("Elapsed time: " + (stopTime - startTime) + " milliseconds");
     }
 }
