@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class SimulatedAnnealing {
 
-    private final static double coolingRate = 0.003;
-    private static double temperature = 200000;
+    private final static double coolingRate = 0.004;
+    private static double temperature = 100000;
     private final List<Double> universe;
 
     public SimulatedAnnealing(final List<Double> universe) {
@@ -14,24 +14,32 @@ public class SimulatedAnnealing {
     }
 
     public double findOptima() {
-        double currentSolution = this.universe.get(this.getRandomIndex());
+        // Best found solution is initially, randomly picked
         double bestSolution = this.universe.get(this.getRandomIndex());
+        // ... and mark it as a current solution
+        double currentSolution = bestSolution;
+        // Energy of the current solution is its' value
         double currentEnergy = currentSolution;
+        // Start annealing
         while (temperature > coolingRate) {
-            // Create new solution that initially bases on the current one
-            double newSolution = currentSolution;
             // Get random position in our universe
             int newSolutionPosition = this.getRandomIndex();
-            final double newSolutionEnergy = Math.abs(bestSolution -(newSolutionPosition));
+            // Retrieve new solution's value
+            final double newSolutionEnergy = this.universe.get(newSolutionPosition);
 
+            // Check whether new solution should be accepted
             if (this.acceptanceProbability(currentEnergy, newSolutionEnergy, temperature) > Math.random()) {
-                currentSolution = newSolution;
+                // Move on to the new solution
+                currentSolution = this.universe.get(newSolutionPosition);
             }
 
+            // Compare to the global optima
             if (newSolutionEnergy < bestSolution) {
+                // Mark as global optima (best found) if current global optima is greater
                 bestSolution = currentSolution;
             }
 
+            // Cool down
             temperature *= 1 - coolingRate;
         }
 
@@ -40,7 +48,7 @@ public class SimulatedAnnealing {
 
     private double acceptanceProbability(final double energy, final double newEnergy, final double temperature) {
         if (newEnergy < energy) {
-            return 1.0;
+            return 1;
         }
 
         return Math.exp((energy - newEnergy) / temperature);
