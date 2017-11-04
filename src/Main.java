@@ -13,5 +13,7 @@ public class Main {
         final long stopTime = System.currentTimeMillis();
         System.out.println("Found solution: " + foundOptima);
         System.out.println("Elapsed time: " + (stopTime - startTime) + " milliseconds");
+//        DeJongTwo deJongTwo = new DeJongTwo(-2.048, 2.048);
+//        System.out.print(deJongTwo.getUniverse());
     }
 }
