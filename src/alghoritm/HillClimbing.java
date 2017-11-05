@@ -16,26 +16,26 @@ public class HillClimbing {
   }
 
   public double findOptima() {
-    double initialSolution = this.universe.get(this.getRandomIndex());
+    double bestSolution = this.universe.get(this.getRandomIndex());
     boolean shouldContinue;
     do {
-      double bestSolution = this.universe.get(this.getRandomIndex());
+      double newSolution = this.universe.get(this.getRandomIndex());
 
       // Iterate through neighbours of initialSolution
       for (Double element : this.notVisitedNeighbours) {
         if (element < bestSolution) {
-          bestSolution = element;
+          newSolution = element;
         }
       }
-      if (initialSolution > bestSolution) {
-        initialSolution = bestSolution;
+      if (bestSolution > newSolution) {
+        bestSolution = newSolution;
         shouldContinue = true;
       } else {
         shouldContinue = false;
       }
     } while (shouldContinue);
 
-    return initialSolution;
+    return bestSolution;
   }
 
   private int getRandomIndex() {
