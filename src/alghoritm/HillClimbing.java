@@ -1,18 +1,14 @@
 package alghoritm;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class HillClimbing {
 
   private final List<Double> universe;
-  private final List<Double> notVisitedNeighbours;
 
   public HillClimbing(final List<Double> universe) {
     this.universe = universe;
-    this.notVisitedNeighbours = new ArrayList<>();
-    this.notVisitedNeighbours.addAll(universe);
   }
 
   public double findOptima() {
@@ -22,7 +18,7 @@ public class HillClimbing {
       double newSolution = this.universe.get(this.getRandomIndex());
 
       // Iterate through neighbours of initialSolution
-      for (Double element : this.notVisitedNeighbours) {
+      for (Double element : this.universe) {
         if (element < bestSolution) {
           newSolution = element;
         }
@@ -40,9 +36,7 @@ public class HillClimbing {
 
   private int getRandomIndex() {
     final Random random = new Random();
-    final int randomIndex = random.nextInt(this.notVisitedNeighbours.size());
-    this.notVisitedNeighbours.remove(randomIndex);
 
-    return randomIndex;
+    return random.nextInt(this.universe.size());
   }
 }
