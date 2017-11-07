@@ -47,7 +47,7 @@ public class SimulatedAnnealing {
   }
 
   private double acceptanceProbability(final double energy, final double newEnergy, final double temperature) {
-    if (newEnergy < energy) {
+    if (newEnergy > energy) {
       return 1;
     }
 
