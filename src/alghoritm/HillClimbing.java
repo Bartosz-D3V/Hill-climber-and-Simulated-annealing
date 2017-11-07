@@ -12,21 +12,20 @@ public class HillClimbing {
   }
 
   public double findOptima() {
+    // Select a random value as a starting point aka 'best solution'
     double bestSolution = this.universe.get(this.getRandomIndex());
     boolean shouldContinue;
     do {
+      // Select a random neighbour
       double newSolution = this.universe.get(this.getRandomIndex());
-
-      // Iterate through neighbours of initialSolution
-      for (Double element : this.universe) {
-        if (element < bestSolution) {
-          newSolution = element;
-        }
-      }
-      if (bestSolution > newSolution) {
+      // If a new solution's value is greater than current, best solution
+      if (bestSolution < newSolution) {
+        // Change the best solution
         bestSolution = newSolution;
+        // And continue searching
         shouldContinue = true;
       } else {
+        // Otherwise stop
         shouldContinue = false;
       }
     } while (shouldContinue);
