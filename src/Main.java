@@ -10,16 +10,16 @@ public class Main {
     SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(deJongOne.getUniverse());
     HillClimbing hillClimbing = new HillClimbing(deJongOne.getUniverse());
 
-    Main.runAlghoritms(simulatedAnnealing, hillClimbing);
+    Main.runAlgorithms(simulatedAnnealing, hillClimbing);
 
     DeJongTwo deJongTwo = new DeJongTwo(-2.048, 2.048);
     simulatedAnnealing = new SimulatedAnnealing(deJongTwo.getUniverse());
     hillClimbing = new HillClimbing(deJongTwo.getUniverse());
 
-    Main.runAlghoritms(simulatedAnnealing, hillClimbing);
+    Main.runAlgorithms(simulatedAnnealing, hillClimbing);
   }
 
-  private static void runAlghoritms(final SimulatedAnnealing simulatedAnnealing, final HillClimbing hillClimbing) {
+  private static void runAlgorithms(final SimulatedAnnealing simulatedAnnealing, final HillClimbing hillClimbing) {
     long startTime = System.currentTimeMillis();
     final double foundOptimaSA = simulatedAnnealing.findOptima();
     long stopTime = System.currentTimeMillis();
